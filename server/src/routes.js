@@ -7,4 +7,6 @@ module.exports = (app) => {
   app.post('/register',
     AuthControllerPolicy.register, //validate before hitting controller
     AuthController.register)
+  app.post('/login',
+    AuthController.login)
 }

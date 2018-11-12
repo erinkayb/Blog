@@ -13,5 +13,8 @@ module.exports = {
       // where to store blogapp files
       storage: './blogapp.sqlite'
     }
+  },
+  auth: {
+    jwtsecret: process.env.JWT_SECRET || 'secret'
   }
 }
