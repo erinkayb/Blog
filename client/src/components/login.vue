@@ -17,6 +17,7 @@
               ></v-text-field>
               <v-text-field
                 label="Password"
+                type="password"
                 box
                 v-model="password"
               ></v-text-field>
@@ -35,7 +36,7 @@
 </template>
 
 <script>
-import authService from '@/services/auth'
+import auth from '@/services/auth'
 export default {
   data () {
     return {
@@ -48,10 +49,12 @@ export default {
     async login () {
       try {
         // authenticate to make sure email exsists in db
-        await authService.login({
+        const response = await auth.login({
           email: this.email,
           password: this.password
         })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
       } catch (error) {
         this.error = error.response.data.error
       }

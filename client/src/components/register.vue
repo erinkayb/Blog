@@ -10,6 +10,9 @@
           </v-toolbar>
           <div class='pl-4 pr-4 pt-4 pb-4'>
             <v-flex>
+              <form
+                name="blog-signup-form"
+                autocomplete="off">
               <v-text-field
                 label="Email"
                 box
@@ -17,9 +20,12 @@
               ></v-text-field>
               <v-text-field
                 label="Password"
+                type="password"
                 box
                 v-model="password"
+                autocomplete="new-password"
               ></v-text-field>
+            </form>
             </v-flex>
 
             <div class="error" v-html='error'></div>
@@ -47,10 +53,12 @@ export default {
   methods: {
     async register () {
       try {
-        await authService.register({
+        const response = await authService.register({
           email: this.email,
           password: this.password
         })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
       } catch (error) {
         this.error = error.response.data.error
       }
