@@ -5,11 +5,11 @@
         <router-link class='colors' to="/">Bloggy</router-link>
       </v-toolbar-title>
 
-      <!-- <v-toolbar-items>
-        <v-btn flat dark>
-          Browsers
+      <v-toolbar-items>
+        <v-btn flat dark v-if='!$store.state.isUserLoggedIn'>
+          <router-link class='colors' to="posts">Browse Posts</router-link>
         </v-btn>
-      </v-toolbar-items> -->
+      </v-toolbar-items>
 
       <v-spacer></v-spacer>
 
