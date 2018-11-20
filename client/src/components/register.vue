@@ -2,13 +2,7 @@
   <v-container grid-list-xl text-md-center>
     <v-layout row wrap>
       <v-flex xs6 offset-xs3>
-        <div class="white elevation-2">
-          <v-toolbar flat dense class='teal lighten-2' dark>
-            <v-toolbar-title>
-              Register
-            </v-toolbar-title>
-          </v-toolbar>
-          <div class='pl-4 pr-4 pt-4 pb-4'>
+        <panel title="Register">
             <v-flex>
               <form
                 name="blog-signup-form"
@@ -33,8 +27,7 @@
               @click="register">
               Register
             </v-btn>
-          </div>
-        </div>
+          </panel>
       </v-flex>
     </v-layout>
   </v-container>
@@ -42,6 +35,7 @@
 
 <script>
 import authService from '@/services/auth'
+import Panel from '@/components/Panel'
 export default {
   data () {
     return {
@@ -63,6 +57,9 @@ export default {
         this.error = error.response.data.error
       }
     }
+  },
+  components: {
+    Panel
   }
 }
 </script>
