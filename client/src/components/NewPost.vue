@@ -4,11 +4,15 @@
       <panel title="Create Your Post">
         <v-text-field
           label="Title"
+          required
+          :rules="[required]"
           box
           v-model="post.title"
         ></v-text-field>
         <v-textarea
           label="Body"
+          required
+          :rules="[required]"
           box
           auto-grow
           rows="3"
@@ -24,6 +28,8 @@
           v-model="post.image"
         ></v-text-field>
       </panel>
+
+      <div class="error-alert" v-if="error">{{error}}</div>
 
       <v-btn class='teal lighten-2 mt-5' dark
         @click="create">
@@ -45,11 +51,20 @@ export default {
         date: null,
         body: null,
         image: null
-      }
+      },
+      error: null,
+      required: (value) => !!value || 'Required!'
     }
   },
   methods: {
     async create () {
+      this.error = null
+      const fieldsChecker = Object.keys(this.post).every(key => !!this.post[key])
+      if(!fieldsChecker) {
+        this.error = 'Please fill in all required fields.'
+        return
+      }
+
       try {
       // call api
         await postsService.post(this.post)
@@ -57,7 +72,7 @@ export default {
           name: 'posts'
         })
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     }
   },

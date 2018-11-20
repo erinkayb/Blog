@@ -3,6 +3,13 @@
     <v-layout row wrap>
       <v-flex xs6 offset-xs3>
         <panel title="Blog Posts">
+          <router-link slot="action" :to="{ name: 'posts-create' }">
+            <v-btn fab class='teal lighten-3' dark small absolute right middle>
+              <v-icon>
+                add
+              </v-icon>
+            </v-btn>
+          </router-link>
           <div v-for="post in posts" :key="post.id">
             <!-- key bind shows unique identifier for the post -->
             {{post.title}}
