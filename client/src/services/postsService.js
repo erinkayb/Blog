@@ -1,8 +1,11 @@
 import api from '@/services/api'
 
 export default {
-  index (credentials) {
+  index () {
     return api().get('posts')
+  },
+  post (post) {
+    return api().post('posts', post)
   }
 }
 

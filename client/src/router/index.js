@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import register from '@/components/register'
 import login from '@/components/login'
 import Posts from '@/components/Posts'
+import NewPost from '@/components/NewPost'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/posts',
       name: 'posts',
       component: Posts
+    },
+    {
+      path: '/posts/create',
+      name: 'posts-create',
+      component: NewPost
     }
   ]
 })
