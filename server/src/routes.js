@@ -1,6 +1,6 @@
 const AuthController = require('./controllers/AuthController')
-
 const AuthControllerPolicy = require('./policies/AuthControllerPolicy')
+const PostsController = require('./controllers/PostsController')
 
 // express middleware
 module.exports = (app) => {
@@ -9,4 +9,8 @@ module.exports = (app) => {
     AuthController.register)
   app.post('/login',
     AuthController.login)
+  app.get('/posts',
+    PostsController.index)
+  app.post('/posts',
+    PostsController.post)
 }

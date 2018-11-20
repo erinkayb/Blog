@@ -2,13 +2,7 @@
   <v-container grid-list-xl text-md-center>
     <v-layout row wrap>
       <v-flex xs6 offset-xs3>
-        <div class="white elevation-2">
-          <v-toolbar flat dense class='teal lighten-2' dark>
-            <v-toolbar-title>
-              Login
-            </v-toolbar-title>
-          </v-toolbar>
-          <div class='pl-4 pr-4 pt-4 pb-4'>
+        <panel title="Login">
             <v-flex>
               <v-text-field
                 label="Email"
@@ -17,6 +11,7 @@
               ></v-text-field>
               <v-text-field
                 label="Password"
+                type="password"
                 box
                 v-model="password"
               ></v-text-field>
@@ -27,15 +22,15 @@
               @click="login">
               login
             </v-btn>
-          </div>
-        </div>
+          </panel>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import authService from '@/services/auth'
+import auth from '@/services/auth'
+import Panel from '@/components/Panel'
 export default {
   data () {
     return {
@@ -48,14 +43,19 @@ export default {
     async login () {
       try {
         // authenticate to make sure email exsists in db
-        await authService.login({
+        const response = await auth.login({
           email: this.email,
           password: this.password
         })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
       } catch (error) {
         this.error = error.response.data.error
       }
     }
+  },
+  components: {
+    Panel
   }
 }
 </script>

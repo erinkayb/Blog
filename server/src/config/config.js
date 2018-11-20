@@ -14,7 +14,7 @@ module.exports = {
       storage: './blogapp.sqlite'
     }
   },
-  auth: {
-    jwtsecret: process.env.JWT_SECRET || 'secret'
+  authentication: {
+    jwtSecret: process.env.JWT_SECRET || 'secret'
   }
 }
